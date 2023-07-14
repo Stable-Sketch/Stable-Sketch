@@ -80,6 +80,7 @@ void StableSketch::Update(unsigned char* key, val_tp val) {
 			sbucket->count-=1;
 			if(sbucket->count<=0)
 			{memcpy(sbucket->key, key, keylen);
+			sbucket->count+=1;
                         sbucket->stablecount = sbucket->stablecount - 1;
                         if(sbucket->stablecount <= 0)
                         {
