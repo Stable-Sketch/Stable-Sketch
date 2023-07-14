@@ -84,13 +84,15 @@ void StableSketch::Update(unsigned char* key, val_tp val) {
 		k = rand() % (int)((sbucket->count*sbucket->stablecount)+1.0) + 1.0;
 		if (k > (int)(((sbucket->count*sbucket->stablecount)))&&sbucket->status==0) 
 		{
-			memcpy(sbucket->key, key, keylen);
+			sbucket->count -= 1;
+			if(sbucket->count <= 0)
+			{memcpy(sbucket->key, key, keylen);
 			sbucket->count += 1;
                         sbucket->stablecount = sbucket->stablecount - 1;
                         if(sbucket->stablecount <= 0)
                         {
                           sbucket->stablecount=0;
-                        }
+                        }}
 			sbucket->status=1;
 		}
 	}
